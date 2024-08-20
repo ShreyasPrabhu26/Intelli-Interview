@@ -11,16 +11,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { chatSession } from '@/utils/GeminiAiModel';
+import { LoaderCircle } from 'lucide-react';
+import { Fascinate } from 'next/font/google';
+import { db } from '@/utils/db';
+import { v4 as uuidv4 } from 'uuid';
+import { useUser } from '@clerk/nextjs';
+import moment from 'moment/moment';
+import { MonkInterview } from '@/utils/schema';
 
 
 const AddNewInterview = () => {
+
+    const { user } = useUser();
 
     const [openDialog, setOpenDialog] = useState(false);
     const [jobPosition, setJobPosition] = useState("");
     const [jobDescription, setJobDescription] = useState("");
     const [jobExperience, setJobExperience] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [jsonResponse, setJsonResponse] = useState([])
 
     const onSubmit = async (event) => {
+        setLoading(true);
         event.preventDefault();
         const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION}technical interview questions and detailed answers: 
             - jobPosition: ${jobPosition}
@@ -32,7 +44,26 @@ const AddNewInterview = () => {
 
         // Filtering the Respose from the model!
         let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '', '```', "");
-        console.log(await JSON.parse(cleanResponse));
+        setJsonResponse(cleanResponse);
+        const parsedJSONResponse = await JSON.parse(cleanResponse);
+        if (resultFromAI) {
+            const response = await db.insert(MonkInterview)
+                .values({
+                    mockId: uuidv4(),
+                    jsonMockResp: parsedJSONResponse,
+                    jobPosition,
+                    jobDescription,
+                    jobExperience,
+                    createdBy: user?.primaryEmailAddress?.emailAddress,
+                    createdAt: moment().format("DD-MM-yyyy"),
+                }).returning({ mockId: MonkInterview.mockId });
+            console.log(`Inserted Id:`, response);
+
+        } else {
+            console.log(`ERROR IN TAKING RESPONSE`);
+        }
+        setLoading(false);
+        setOpenDialog(false);
     }
 
     return (
@@ -72,7 +103,14 @@ const AddNewInterview = () => {
                                 </div>
                                 <div className='flex gap-5 justify-end'>
                                     <Button type="button" variant="ghost" onClick={() => setOpenDialog(false)}>Cancle</Button>
-                                    <Button type="submit">Start Interview</Button>
+                                    <Button type="submit" disabled={loading}>
+                                        {loading ?
+                                            <>
+                                                <LoaderCircle className='animate-spin' />
+                                                Generation is in Progress
+                                            </>
+                                            : "Start Interview"}
+                                    </Button>
                                 </div>
                             </form>
                         </DialogDescription>
