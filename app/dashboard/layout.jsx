@@ -1,9 +1,13 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import React from 'react'
+import Header from './_componenets/Header'
 
 const DashboardLayout = ({ children }) => {
     return (
-        <div>{children}</div>
+        <>
+            <Header />
+            <div>{children}</div>
+        </>
     )
 }
 

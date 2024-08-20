@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.header_link_items li {
+  @apply hover:text-primary hover:font-bold transition-all cursor-pointer;
+}
