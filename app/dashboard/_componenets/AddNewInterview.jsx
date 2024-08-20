@@ -17,7 +17,8 @@ import { db } from '@/utils/db';
 import { v4 as uuidv4 } from 'uuid';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment/moment';
-import { MonkInterview } from '@/utils/schema';
+import { MockInterview } from '@/utils/schema';
+import { useRouter } from 'next/navigation';
 
 
 const AddNewInterview = () => {
@@ -30,6 +31,7 @@ const AddNewInterview = () => {
     const [jobExperience, setJobExperience] = useState("");
     const [loading, setLoading] = useState(false);
     const [jsonResponse, setJsonResponse] = useState([])
+    const router = useRouter();
 
     const onSubmit = async (event) => {
         setLoading(true);
@@ -47,7 +49,7 @@ const AddNewInterview = () => {
         setJsonResponse(cleanResponse);
         const parsedJSONResponse = await JSON.parse(cleanResponse);
         if (resultFromAI) {
-            const response = await db.insert(MonkInterview)
+            const responseFromORM = await db.insert(MockInterview)
                 .values({
                     mockId: uuidv4(),
                     jsonMockResp: parsedJSONResponse,
@@ -56,14 +58,16 @@ const AddNewInterview = () => {
                     jobExperience,
                     createdBy: user?.primaryEmailAddress?.emailAddress,
                     createdAt: moment().format("DD-MM-yyyy"),
-                }).returning({ mockId: MonkInterview.mockId });
-            console.log(`Inserted Id:`, response);
+                }).returning({ mockId: MockInterview.mockId });
 
+            if (responseFromORM) {
+                setOpenDialog(false);
+                router.push(`/dashboard/interview/${response[0]?.mockId}`)
+            }
         } else {
             console.log(`ERROR IN TAKING RESPONSE`);
         }
         setLoading(false);
-        setOpenDialog(false);
     }
 
     return (
