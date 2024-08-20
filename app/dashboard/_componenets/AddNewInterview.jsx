@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { chatSession } from '@/utils/GeminiAiModel';
 
 
 const AddNewInterview = () => {
@@ -19,11 +20,19 @@ const AddNewInterview = () => {
     const [jobDescription, setJobDescription] = useState("");
     const [jobExperience, setJobExperience] = useState("");
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
-        console.log(jobPosition);
-        console.log(jobDescription);
-        console.log(jobExperience);
+        const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION}technical interview questions and detailed answers: 
+            - jobPosition: ${jobPosition}
+            - jobDescription: ${jobDescription} 
+            - jobExperience: ${jobExperience} year 
+            Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level."
+            `
+        const resultFromAI = await chatSession.sendMessage(inputPrompt);
+
+        // Filtering the Respose from the model!
+        let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '', '```', "");
+        console.log(await JSON.parse(cleanResponse));
     }
 
     return (
