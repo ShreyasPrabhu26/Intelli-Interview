@@ -34,18 +34,27 @@ const FeedBack = ({ params }) => {
     return (
         <>
             <div className="flex flex-col gap-2 mb-8">
-                <div className='text-3xl font-bold text-green-500'>
-                    Congratulations!
-                </div>
-                <h2 className='text-2xl font-bold'>
-                    Here is your interview Feedback
-                </h2>
-                <span className='text-2xl font-bold'>
-                    Your Overall Ratings: 5/10
-                </span>
-                <p className='text-xl text-gray-500'>
-                    Find below interview question with correct answer.
-                </p>
+
+                {feedBackList?.length === 0 ?
+                    <span className='text-2xl text-gray-500 font-bold'>
+                        No Interview Data Found!
+                    </span>
+                    :
+                    <>
+                        <div className='text-3xl font-bold text-green-500'>
+                            Congratulations!
+                        </div>
+                        <h2 className='text-2xl font-bold'>
+                            Here is your interview Feedback
+                        </h2>
+                        <span className='text-2xl font-bold'>
+                            Your Overall Ratings: 5/10
+                        </span>
+                        <p className='text-xl text-gray-500'>
+                            Find below interview question with correct answer.
+                        </p>
+                    </>
+                }
             </div>
 
             {feedBackList && feedBackList.map((feedback, index) => (

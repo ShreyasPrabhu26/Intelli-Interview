@@ -62,7 +62,7 @@ const AddNewInterview = () => {
 
             if (responseFromORM) {
                 setOpenDialog(false);
-                router.push(`/dashboard/interview/${response[0]?.mockId}`)
+                router.push(`/dashboard/interview/${responseFromORM[0]?.mockId}`)
             }
         } else {
             console.log(`ERROR IN TAKING RESPONSE`);
