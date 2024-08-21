@@ -19,6 +19,7 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
         results,
         startSpeechToText,
         stopSpeechToText,
+        setResults
     } = useSpeechToText({
         continuous: true,
         useLegacyResults: false
@@ -73,6 +74,7 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
         }
         setIsLoading(false);
         setUserAnswer("");
+        setResults([]);
     }
 
     useEffect(() => {
@@ -89,8 +91,8 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
 
     return (
         <div className='flex flex-col items-center justify-center'>
-            <div className='flex flex-col justify-center mt-8 items-center bg-blue-100 rounded-lg p-5'>
-                <WebcamIcon className='h-64 w-full my-7 p-20 rounded-lg absolute' />
+            <div className='flex flex-col justify-center items-center bg-blue-100 rounded-lg p-5'>
+                <WebcamIcon className='h-64 w-full my-7 p-20 mb-20 rounded-lg absolute' />
                 <Webcam className="rounded-2xl h-96 w-full z-10"
                     mirrored={true}
                     onUserMedia={() => setIsWebCamEnabled(true)}
