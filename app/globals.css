@@ -68,10 +68,19 @@
   }
 }
 
-.header_link_items li {
-  @apply text-xl hover:text-primary hover:font-bold transition-all cursor-pointer;
+.nav_element {
+  @apply text-nowrap w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none;
+}
+
+.nav_element_on_md {
+  @apply text-nowrap inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800;
 }
 
 label {
   @apply mb-3;
+}
+
+.cl-avatarBox {
+  width: 2.75rem;
+  height: 2.75rem;
 }

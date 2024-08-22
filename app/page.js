@@ -1,11 +1,12 @@
+import { GoogleGeminiEffectComponent } from "@/components/homepageComponents/GoogleGeminiEffectComponent";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/Container";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="">
+    <Container>
       <h1>Hello</h1>
-      <Button>Shreyas</Button>
-    </div>
+    </Container>
   );
 }
