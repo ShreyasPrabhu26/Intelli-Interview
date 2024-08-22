@@ -10,7 +10,7 @@ export const Navbar = () => {
 
     return (
         <div className="w-full">
-            <nav className="container relative flex flex-wrap items-center justify-evenly px-8 mx-auto lg:justify-evenly xl:px-0">
+            <nav className="container relative flex flex-wrap items-center justify-evenly px-8 mx-auto lg:justify-evenly xl:px-0 py-3">
                 {/* Logo  */}
                 <Disclosure>
                     {({ open }) => (
