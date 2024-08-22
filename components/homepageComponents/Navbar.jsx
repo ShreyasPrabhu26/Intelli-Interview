@@ -10,7 +10,7 @@ export const Navbar = () => {
 
     return (
         <div className="w-full">
-            <nav className="container relative flex flex-wrap items-center justify-evenly p-8 mx-auto lg:justify-evenly xl:px-0">
+            <nav className="container relative flex flex-wrap items-center justify-evenly px-8 mx-auto lg:justify-evenly xl:px-0">
                 {/* Logo  */}
                 <Disclosure>
                     {({ open }) => (
@@ -21,7 +21,7 @@ export const Navbar = () => {
                                         <span>
                                             <img src={"/logo.svg"} className='rounded-xl' width={75} height={75} alt="Logo" />
                                         </span>
-                                        <span>Nextly</span>
+                                        <span>Intelli Interview</span>
                                     </span>
                                 </Link>
 
@@ -64,11 +64,6 @@ export const Navbar = () => {
                                             <span>Switch Theme: </span>
                                             <ThemeChanger />
                                         </div>
-
-                                        <Link href="/" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">
-                                            Get Started
-                                        </Link>
-
                                     </>
                                 </Disclosure.Panel>
                             </div>
@@ -87,11 +82,6 @@ export const Navbar = () => {
                             <Link href={'/dashboard/upgrade'} className={`nav_element_on_md`}>Upgrade</Link>
 
                             <Link href={'/dashboard/howitworks'} className={`nav_element_on_md`}>How it works?</Link>
-
-
-                            <Link href="/" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">
-                                Get Started
-                            </Link>
 
                         </>
                     </ul>
