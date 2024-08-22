@@ -8,6 +8,7 @@ import { GoogleGeminiEffectComponent } from "@/components/homepageComponents/Goo
 import { GlobeComponent } from "@/components/homepageComponents/GlobeComponent";
 import { CallToAction } from "@/components/homepageComponents/CallToAction";
 import { CallToActionWrapper } from "@/components/homepageComponents/CallToActionWrapper";
+import { Footer } from "@/components/homepageComponents/Footer";
 
 export default function Home() {
   return (
@@ -20,11 +21,12 @@ export default function Home() {
       </Container>
       <GoogleGeminiEffectComponent />
       <GlobeComponent />
-      <div className=" bg-red-200">
+      <div>
         <CallToActionWrapper>
           <CallToAction />
         </CallToActionWrapper>
       </div>
+      <Footer />
     </>
   );
 }

@@ -9,7 +9,7 @@ export function CallToActionWrapper({ children }) {
         <div
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            className="h-[100vh] flex flex-col lg:flex-row overflow-hidden items-center justify-center bg-black w-full gap-4 mx-auto px-8 relative"
+            className="h-[70vh] md:h-[100vh] flex flex-col lg:flex-row overflow-hidden items-center justify-center bg-green-100 dark:bg-black w-full gap-4 mx-auto px-8 relative"
         >
             <div className="z-10">{children}</div>
             <AnimatePresence>
