@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import React from "react";
 
 const transition = {
@@ -15,7 +16,7 @@ export const GoogleGeminiEffect = ({
   className
 }) => {
   return (
-    (<div className={cn("sticky top-80", className)}>
+    (<div className={cn("sticky top-40", className)}>
       <p
         className="text-lg md:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
         {title || `Build with Aceternity UI`}
@@ -28,10 +29,11 @@ export const GoogleGeminiEffect = ({
       </p>
       <div
         className="w-full h-[890px] -top-60 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
-        <button
-          className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-black text-xs  w-fit mx-auto ">
-          ui.aceternity.com
-        </button>
+        <Link
+          href="/dashboard"
+          className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-32 mt-8 z-30 md:text-base text-black text-xs w-fit mx-auto uppercase">
+          Intelli Interview!
+        </Link>
       </div>
       <svg
         width="1440"

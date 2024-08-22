@@ -1,7 +1,7 @@
 "use client";
 import { useScroll, useTransform } from "framer-motion";
 import React from "react";
-import { GoogleGeminiEffect } from "../ui/google-gemini-effect";
+import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 
 export function GoogleGeminiEffectComponent() {
     const ref = React.useRef(null);
@@ -29,6 +29,8 @@ export function GoogleGeminiEffectComponent() {
                     pathLengthFourth,
                     pathLengthFifth,
                 ]}
+                title={"Build With AI SuperPower"}
+                description={"Transform your preparation, sharpen your skills, and confidently face any interview with the superpower of AI."}
             />
         </div>
     );
