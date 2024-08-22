@@ -5,6 +5,7 @@ import Image from "next/image";
 import { benefitOne, benefitTwo } from "@/components/homepageComponents/data";
 import { BenefitsSection } from "@/components/homepageComponents/BenifitsSection"
 import { GoogleGeminiEffectComponent } from "@/components/homepageComponents/GoogleGeminiEffectComponent";
+import { GlobeComponent } from "@/components/homepageComponents/GlobeComponent";
 
 export default function Home() {
   return (
@@ -14,9 +15,10 @@ export default function Home() {
         <Companies />
         <BenefitsSection data={benefitOne} />
         <BenefitsSection imgPos="right" data={benefitTwo} />
-        {/* <div className="h-[400vh]">Dummy</div> */}
       </Container>
       <GoogleGeminiEffectComponent />
+      <GlobeComponent />
+      <div className="h-[300vh]">di</div>
     </>
   );
 }
