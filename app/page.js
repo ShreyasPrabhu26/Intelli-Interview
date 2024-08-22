@@ -6,6 +6,8 @@ import { benefitOne, benefitTwo } from "@/components/homepageComponents/data";
 import { BenefitsSection } from "@/components/homepageComponents/BenifitsSection"
 import { GoogleGeminiEffectComponent } from "@/components/homepageComponents/GoogleGeminiEffectComponent";
 import { GlobeComponent } from "@/components/homepageComponents/GlobeComponent";
+import { CallToAction } from "@/components/homepageComponents/CallToAction";
+import { CallToActionWrapper } from "@/components/homepageComponents/CallToActionWrapper";
 
 export default function Home() {
   return (
@@ -18,7 +20,11 @@ export default function Home() {
       </Container>
       <GoogleGeminiEffectComponent />
       <GlobeComponent />
-      <div className="h-[300vh]">di</div>
+      <div className=" bg-red-200">
+        <CallToActionWrapper>
+          <CallToAction />
+        </CallToActionWrapper>
+      </div>
     </>
   );
 }
