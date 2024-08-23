@@ -1,4 +1,5 @@
 "use client"
+import { BackgroundGradientWrapper } from '@/components/homepageComponents/BackgroundGradientWrapper'
 import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db'
 import { MockInterview } from '@/utils/schema'
@@ -18,7 +19,6 @@ const Interview = ({ params }) => {
             const interviewDetails = await db.select().from(MockInterview)
                 .where(eq(MockInterview.mockId, mockId))
 
-
             if (!interviewDetails) {
                 setInterviewData(null)
             } else {
@@ -35,21 +35,21 @@ const Interview = ({ params }) => {
     }, [])
 
     return (
-        <div className='my-10'>
-            <h2 className='font-bold text-2xl'>Let's Get Started</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 rounded-lg content-start">
+        <div className='my-10 border rounded-xl p-2'>
+            <h2 className='font-bold text-2xl ml-3'>Let's Get Started</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-3 rounded-lg content-start">
                 {/* LEFT SIDE */}
-                <div className='flex flex-col gap-5 border p-5'>
+                <div className='flex flex-col gap-5 border p-5 rounded-md'>
                     <div className="flex flex-col rounded-lg gap-5">
                         <span><strong>Job Role/Job Position:</strong>{interviewData?.jobPosition?.toUpperCase()}</span>
                         <span><strong>Job Description:</strong>{interviewData?.jobDescription}</span>
                         <span><strong>Job Role/Job Position:</strong>{interviewData?.jobExperience}</span>
                     </div>
-                    <div className='p-5 border rounded-lg border-yellow-300 bg-yellow-100'>
+                    <div className='p-5 border rounded-lg border-yellow-300bg-yellow-100'>
                         <h2 className='flex gap-2 items-center text-yellow-500'>
                             <Lightbulb /><strong>Information</strong>
                         </h2>
-                        <p className='mt-3 text-yellow-500'>
+                        <p className='mt-3 text-yellow-500 dark:'>
                             Enable Vidio Web Cam and Microphone to start your AI Generated Mock Interview,it contains {process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} questions.
                         </p>
                     </div>
@@ -61,16 +61,18 @@ const Interview = ({ params }) => {
                         onUserMedia={() => setIsWebCamEnabled(true)}
                         onUserMediaError={() => setInterviewData(false)} />
                     :
-                    <div className='border'>
-                        <WebcamIcon className='h-64 w-full my-7 p-20 rounded-lg' />
-                        <Button className="w-full bg-blue-400" onClick={() => setIsWebCamEnabled(true)}>Enable Web Cam and Microphone</Button>
+                    <div className='flex flex-col justify-center items-center border rounded-md'>
+                        <WebcamIcon className='h-60 w-full my-7 p-20 rounded-lg' />
+                        <Button className=" bg-blue-400 mb-3" onClick={() => setIsWebCamEnabled(true)}>Enable Web Cam and Microphone</Button>
                     </div>
                 }
             </div>
             <div>
-                <div className="flex justify-end items-end">
+                <div className="flex justify-center items-end">
                     <Link href={`/dashboard/interview/${mockId}/start`}>
-                        <Button>Start Interview</Button>
+                        <BackgroundGradientWrapper className={"p-2"}>
+                            <Button className="dark:text-white rounded-lg text-lg">Start Interview</Button>
+                        </BackgroundGradientWrapper>
                     </Link>
                 </div>
             </div>

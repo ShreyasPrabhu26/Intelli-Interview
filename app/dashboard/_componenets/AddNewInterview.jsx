@@ -117,7 +117,7 @@ const AddNewInterview = () => {
                                         {loading ?
                                             <>
                                                 <LoaderCircle className='animate-spin' />
-                                                Generation is in Progress
+                                                Preparing your Interview
                                             </>
                                             : "Start Interview"}
                                     </Button>
