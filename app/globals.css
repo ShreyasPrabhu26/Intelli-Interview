@@ -80,6 +80,10 @@ label {
   @apply mb-3;
 }
 
+input {
+  @apply my-2;
+}
+
 .cl-avatarBox {
   width: 2.75rem;
   height: 2.75rem;

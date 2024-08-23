@@ -37,13 +37,16 @@ export const CardContainer = ({
     setIsMouseEntered(false);
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
   };
+
   return (
-    (<MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn("flex items-center justify-center", containerClassName)}
         style={{
           perspective: "1000px",
-        }}>
+          width: "100%",
+        }}
+      >
         <div
           ref={containerRef}
           onMouseEnter={handleMouseEnter}
@@ -55,26 +58,26 @@ export const CardContainer = ({
           )}
           style={{
             transformStyle: "preserve-3d",
-          }}>
+            width: "100%",
+            maxWidth: "300px", // Ensure a max-width to avoid overflow
+          }}
+        >
           {children}
         </div>
       </div>
-    </MouseEnterContext.Provider>)
+    </MouseEnterContext.Provider>
   );
 };
-
-export const CardBody = ({
-  children,
-  className
-}) => {
+export const CardBody = ({ children, className }) => {
   return (
-    (<div
+    <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-96 w-96 [transform-style:preserve-3d] md:w-[28rem] [&>*]:[transform-style:preserve-3d]",
         className
-      )}>
+      )}
+    >
       {children}
-    </div>)
+    </div>
   );
 };
 
@@ -107,12 +110,16 @@ export const CardItem = ({
   };
 
   return (
-    (<Tag
+    <Tag
       ref={ref}
-      className={cn("w-fit transition duration-200 ease-linear", className)}
-      {...rest}>
+      className={cn(
+        "w-fit transition duration-200 ease-linear break-words md:text-lg",
+        className
+      )}
+      {...rest}
+    >
       {children}
-    </Tag>)
+    </Tag>
   );
 };
 

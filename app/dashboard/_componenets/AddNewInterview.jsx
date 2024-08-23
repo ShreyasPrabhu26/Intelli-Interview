@@ -93,6 +93,7 @@ const AddNewInterview = () => {
                                         <label>Job Role/Position</label>
                                         <Input placeholder="Ex Full Stack Developer"
                                             required
+                                            autoFocus={true}
                                             onChange={(event) => setJobPosition(event.target.value)}
                                         />
                                     </div>
@@ -100,6 +101,7 @@ const AddNewInterview = () => {
                                         <label>Job Description/Tech Stakc (In Short)</label>
                                         <Textarea placeholder="Ex React, NextJS, Angular, Node JS"
                                             required
+                                            className="my-1"
                                             onChange={(event) => setJobDescription(event.target.value)} />
                                     </div>
                                     <div className='my-3'>
@@ -110,8 +112,8 @@ const AddNewInterview = () => {
                                     </div>
                                 </div>
                                 <div className='flex gap-5 justify-end'>
-                                    <Button type="button" variant="ghost" onClick={() => setOpenDialog(false)}>Cancle</Button>
-                                    <Button type="submit" disabled={loading}>
+                                    <Button type="button" className="border-2" variant="ghost" onClick={() => setOpenDialog(false)}>Cancle</Button>
+                                    <Button type="submit" className="text-white " disabled={loading}>
                                         {loading ?
                                             <>
                                                 <LoaderCircle className='animate-spin' />
