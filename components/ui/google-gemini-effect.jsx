@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
+import { BackgroundGradientWrapper } from "../homepageComponents/BackgroundGradientWrapper";
 
 const transition = {
   duration: 0,
@@ -28,12 +29,14 @@ export const GoogleGeminiEffect = ({
         works!`}
       </p>
       <div
-        className="w-full h-[890px] -top-60 md:-top-30  flex items-center justify-center bg-red-transparent absolute ">
-        <Link
-          href="/dashboard"
-          className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-64 mt-8 z-30 md:text-base text-black text-xs w-fit mx-auto uppercase">
-          Intelli Interview!
-        </Link>
+        className="w-full h-[890px] -top-56 md:-top-28 flex items-center justify-center bg-red-transparent absolute ">
+        <BackgroundGradientWrapper className={"p-1 md:p-3 md:py-4"}>
+          <Link
+            href="/dashboard"
+            className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-64 mt-8 z-30 md:text-base text-black text-xs w-fit mx-auto uppercase">
+            Intelli Interview!
+          </Link>
+        </BackgroundGradientWrapper>
       </div>
       <svg
         width="1440"
@@ -146,6 +149,6 @@ export const GoogleGeminiEffect = ({
           </filter>
         </defs>
       </svg>
-    </div>)
+    </div >)
   );
 };

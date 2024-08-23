@@ -5,6 +5,7 @@ import { useUser } from '@clerk/nextjs';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import InterviewItemCard from './InterviewItemCard';
+import { InterviewItemCard3D } from './InterviewItemCard3D';
 
 const InterviewList = () => {
 
@@ -25,18 +26,22 @@ const InterviewList = () => {
 
     return (
         <div>
-            <h1 className='font-medium text-xl'>
+            <h1 className='font-medium text-xl mb-5'>
                 Previous Mock Interview
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
                 {interviewList && interviewList.map((interviewDetail, index) => (
-                    <div key={index} className='bg-gray-100 mb-3'>
-                        <InterviewItemCard interviewDetail={interviewDetail} />
-                    </div>
+                    <InterviewItemCard3D key={index} interviewDetail={interviewDetail} />
                 ))}
             </div>
-        </div >
-    )
+        </div>
+    );
+
+
 }
 
 export default InterviewList
+
+{/* <MeteorCardWrapper> */ }
+{/* <InterviewItemCard interviewDetail={interviewDetail} /> */ }
+{/* </MeteorCardWrapper> */ }

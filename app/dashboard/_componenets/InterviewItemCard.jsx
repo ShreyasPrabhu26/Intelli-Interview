@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
+
 const InterviewItemCard = ({ interviewDetail }) => {
 
     const mockId = interviewDetail?.mockId;
@@ -12,11 +13,8 @@ const InterviewItemCard = ({ interviewDetail }) => {
 
     const router = useRouter();
 
-    const onStart = () => {
-    }
-
     return (
-        <section className='border shadow-sm rounded-lg p-3 flex flex-col justify-center gap-3'>
+        <section className=' shadow-sm rounded-lg flex flex-col justify-center items-center gap-5'>
             <span className='font-bold text-blue-500 text-lg'>{jobPosition}</span>
             <span className='font-bold text-base text-gray-500'>
                 <strong className='text-blue-500'>
@@ -26,7 +24,7 @@ const InterviewItemCard = ({ interviewDetail }) => {
             <span className='font-bold text-sm text-gray-500'>
                 Created At: {jobCreatedAt}
             </span>
-            <div className='flex justify-between gap-2'>
+            <div className='flex justify-between gap-10'>
                 <Button className="w-full bg-gray-300 text-black"
                     size="sm"
                     varient="outline"
@@ -34,7 +32,7 @@ const InterviewItemCard = ({ interviewDetail }) => {
                     Feedback
                 </Button>
                 <Button
-                    className="w-full"
+                    className="w-full dark:text-white"
                     size="sm"
                     onClick={() => router.push(`/dashboard/interview/${mockId}`)}
                 >

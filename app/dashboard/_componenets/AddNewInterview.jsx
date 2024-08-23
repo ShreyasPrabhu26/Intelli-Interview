@@ -19,6 +19,7 @@ import { useUser } from '@clerk/nextjs';
 import moment from 'moment/moment';
 import { MockInterview } from '@/utils/schema';
 import { useRouter } from 'next/navigation';
+import { BackgroundGradientWrapper } from '@/app/dashboard/_componenets/BackgroundGradientWrapper';
 
 
 const AddNewInterview = () => {
@@ -72,8 +73,11 @@ const AddNewInterview = () => {
 
     return (
         <div>
-            <div onClick={() => setOpenDialog(true)} className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'>
-                <h2 className='text-lg text-center'>+ Add New</h2>
+            <div onClick={() => setOpenDialog(true)} className='border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'>
+                <BackgroundGradientWrapper>
+                    <h2 className='text-lg text-center'>
+                        + Add New</h2>
+                </BackgroundGradientWrapper>
             </div>
             <Dialog open={openDialog}>
                 <DialogContent className="max-w-2xl">
@@ -121,7 +125,7 @@ const AddNewInterview = () => {
                     </DialogHeader>
                 </DialogContent>
             </Dialog>
-        </div >
+        </div>
     )
 }
 
