@@ -37,12 +37,13 @@ const AddNewInterview = () => {
     const onSubmit = async (event) => {
         setLoading(true);
         event.preventDefault();
-        const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION}technical interview questions and detailed answers: 
-            - jobPosition: ${jobPosition}
-            - jobDescription: ${jobDescription} 
-            - jobExperience: ${jobExperience} year 
-            Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level."
-            `
+        const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} technical interview questions and detailed answers: 
+        - jobPosition: Software Engineer
+        - jobDescription: Design and develop software applications 
+        - jobExperience: 3 years 
+        Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level.
+        For software engineering roles, avoid asking the user to write a coding program; instead, focus on logic and problem-solving skills."`
+
         const resultFromAI = await chatSession.sendMessage(inputPrompt);
 
         // Filtering the Respose from the model!
