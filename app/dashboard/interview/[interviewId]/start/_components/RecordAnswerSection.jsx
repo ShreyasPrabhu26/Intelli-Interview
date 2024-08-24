@@ -9,9 +9,9 @@ import moment from 'moment/moment'
 import React, { useEffect, useState } from 'react'
 import useSpeechToText from 'react-hook-speech-to-text'
 import Webcam from 'react-webcam'
-import { toast } from 'sonner'
+import { toast, Toaster } from 'sonner'
 
-const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQuestionIndex }) => {
+const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQuestionIndex, setIsRecording }) => {
     const {
         error,
         interimResult,
@@ -25,33 +25,34 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
         useLegacyResults: false
     });
 
-
     const [isWebCamEnabled, setIsWebCamEnabled] = useState(false);
     const [userAnswer, setUserAnswer] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useUser();
 
-    const currentQuestion = mockInterviewQuestions[activeQuestionIndex]?.["question"]
-    const correctAnswer = mockInterviewQuestions[activeQuestionIndex]?.["answer"]
+    const currentQuestion = mockInterviewQuestions[activeQuestionIndex]?.["question"];
+    const correctAnswer = mockInterviewQuestions[activeQuestionIndex]?.["answer"];
 
     if (error) {
-        return <p>Web Speech API is not available in this browser 🤷‍ Please switch to Chrome Browser for best experience</p>
+        return <p>Web Speech API is not available in this browser 🤷‍ Please switch to Chrome Browser for best experience</p>;
     }
 
     const startStopRecording = async () => {
         if (isRecording) {
             stopSpeechToText();
+            setIsRecording(false);
         } else {
             startSpeechToText();
+            setIsRecording(true);
         }
-    }
+    };
 
     const updateUserAnswerInDB = async () => {
         setIsLoading(true);
 
         const feedBackPromt = `"Based on the following question and user answer, provide a rating (out of 10) and detailed feedback. Highlight areas of improvement if necessary in 3-5 lines, in JSON format with 'rating' and 'feedback' fields. Note: Do not mention or critique grammar, spelling, or typos. Focus only on understanding the user's intent and the accuracy of their response. Assume any misspellings or grammar issues are due to transcription errors.
         Question: ${currentQuestion}
-        User Answer: ${userAnswer}"`
+        User Answer: ${userAnswer}"`;
 
         const resultFromAi = await chatSession.sendMessage(feedBackPromt);
         const mockResponse = resultFromAi.response.text().replace(/```json|```/g, '');
@@ -67,27 +68,28 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
                 userEmail: user.primaryEmailAddress?.emailAddress,
                 userAnswer: userAnswer,
                 createdAt: moment().format("DD-MM-yyyy")
-            })
+            });
 
         if (responseFromORM) {
-            toast("Your Answer has been recorded Sucessfully!")
+            <Toaster position="top-right" />
+            toast("Your Answer has been recorded successfully!");
         }
         setIsLoading(false);
         setUserAnswer("");
         setResults([]);
-    }
+    };
 
     useEffect(() => {
         results.map((result) => (
             setUserAnswer((prevAns) => prevAns + result.transcript)
-        ))
-    }, [results])
+        ));
+    }, [results]);
 
     useEffect(() => {
         if (!isRecording && userAnswer.length > 10) {
             updateUserAnswerInDB();
         }
-    }, [userAnswer])
+    }, [userAnswer]);
 
     return (
         <div className='flex flex-col items-center justify-center'>
@@ -111,7 +113,7 @@ const RecordAnswerSection = ({ interviewData, mockInterviewQuestions, activeQues
                         "Record Answer"}
             </Button>
         </div>
-    )
+    );
 }
 
-export default RecordAnswerSection
+export default RecordAnswerSection;
