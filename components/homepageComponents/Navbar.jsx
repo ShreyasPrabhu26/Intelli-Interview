@@ -54,11 +54,7 @@ export const Navbar = () => {
 
                                         <Link href={'/dashboard'} className={`nav_element`}>Dashboard</Link>
 
-                                        <Link href={'/dashboard/questions'} className={`nav_element`}>Questions</Link>
-
                                         <Link href={'/dashboard/upgrade'} className={`nav_element`}>Upgrade</Link>
-
-                                        <Link href={'/dashboard/howitworks'} className={`nav_element`}> How it works?</Link>
 
                                         <div className="flex gap-3">
                                             <span>Switch Theme: </span>
@@ -77,11 +73,7 @@ export const Navbar = () => {
                         <>
                             <Link href={'/dashboard'} className={`nav_element_on_md`}>Dashboard</Link>
 
-                            <Link href={'/dashboard/questions'} className={`nav_element_on_md`}>Questions</Link>
-
                             <Link href={'/dashboard/upgrade'} className={`nav_element_on_md`}>Upgrade</Link>
-
-                            <Link href={'/dashboard/howitworks'} className={`nav_element_on_md`}>How it works?</Link>
 
                         </>
                     </ul>
