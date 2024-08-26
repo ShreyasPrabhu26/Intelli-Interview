@@ -49,6 +49,7 @@ const AddNewInterview = () => {
         // Filtering the Respose from the model!
         let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '', '```', "");
         setJsonResponse(cleanResponse);
+        console.log(cleanResponse);
         const parsedJSONResponse = await JSON.parse(cleanResponse);
         if (resultFromAI) {
             const responseFromORM = await db.insert(MockInterview)

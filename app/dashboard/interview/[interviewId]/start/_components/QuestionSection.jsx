@@ -2,7 +2,7 @@ import { Lightbulb, Volume2 } from 'lucide-react'
 import React from 'react'
 
 const QuestionSection = ({ mockInterviewQuestions, activeQuestionIndex }) => {
-    const currentQuestion = mockInterviewQuestions[activeQuestionIndex]?.["question"]
+    const currentQuestion = mockInterviewQuestions?.[activeQuestionIndex]?.["question"] || "Loading question...";
 
     const textToSpeach = (text) => {
         if ('speechSynthesis' in window) {
@@ -20,8 +20,8 @@ const QuestionSection = ({ mockInterviewQuestions, activeQuestionIndex }) => {
                     <h2
                         key={index}
                         className={`p-2 rounded-full text-xs md:text-sm text-center cursor-pointer ${activeQuestionIndex === index
-                                ? "bg-blue-500 text-white dark:bg-blue-700"
-                                : "bg-blue-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                            ? "bg-blue-500 text-white dark:bg-blue-700"
+                            : "bg-blue-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
                             }`}
                     >
                         Question {index + 1}
@@ -38,11 +38,12 @@ const QuestionSection = ({ mockInterviewQuestions, activeQuestionIndex }) => {
                     <strong>Note:</strong>
                 </h2>
                 <p className='mt-3 text-blue-400 dark:text-blue-500'>
-                    Enable Vidio Web Cam and Microphone to start your AI Generated Mock Interview,it contains {process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} questions.
+                    Enable Video Web Cam and Microphone to start your AI Generated Mock Interview, it contains {process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} questions.
                 </p>
             </div>
         </div>
     )
 }
+
 
 export default QuestionSection
