@@ -35,42 +35,45 @@ const AddNewInterview = () => {
     const router = useRouter();
 
     const onSubmit = async (event) => {
-        setLoading(true);
         event.preventDefault();
-        const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} technical interview questions and detailed answers: 
-        - jobPosition: Software Engineer
-        - jobDescription: Design and develop software applications 
-        - jobExperience: 3 years 
-        Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level.
-        For software engineering roles, avoid asking the user to write a coding program; instead, focus on logic and problem-solving skills."`
+        setLoading(true);
 
-        const resultFromAI = await chatSession.sendMessage(inputPrompt);
+        try {
+            const inputPrompt = `"Using the following placeholders, generate a JSON object with ${process.env.NEXT_PUBLIC_NO_OF_INTERVIEW_QUESTION} technical interview questions and detailed answers: 
+            - jobPosition: Software Engineer
+            - jobDescription: Design and develop software applications 
+            - jobExperience: 3 years 
+            Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level.
+            For software engineering roles, avoid asking the user to write a coding program; instead, focus on logic and problem-solving skills."`
 
-        // Filtering the Respose from the model!
-        let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '', '```', "");
-        setJsonResponse(cleanResponse);
-        console.log(cleanResponse);
-        const parsedJSONResponse = await JSON.parse(cleanResponse);
-        if (resultFromAI) {
-            const responseFromORM = await db.insert(MockInterview)
-                .values({
-                    mockId: uuidv4(),
-                    jsonMockResp: parsedJSONResponse,
-                    jobPosition,
-                    jobDescription,
-                    jobExperience,
-                    createdBy: user?.primaryEmailAddress?.emailAddress,
-                    createdAt: moment().format("DD-MM-yyyy"),
-                }).returning({ mockId: MockInterview.mockId });
+            const resultFromAI = await chatSession.sendMessage(inputPrompt);
 
-            if (responseFromORM) {
-                setOpenDialog(false);
-                router.push(`/dashboard/interview/${responseFromORM[0]?.mockId}`)
+            // Filtering the response from the model
+            let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '');
+            const parsedJSONResponse = JSON.parse(cleanResponse);
+
+            if (resultFromAI) {
+                const responseFromORM = await db.insert(MockInterview)
+                    .values({
+                        mockId: uuidv4(),
+                        jsonMockResp: parsedJSONResponse,
+                        jobPosition,
+                        jobDescription,
+                        jobExperience,
+                        createdBy: user?.primaryEmailAddress?.emailAddress,
+                        createdAt: moment().format("DD-MM-yyyy"),
+                    }).returning({ mockId: MockInterview.mockId });
+
+                if (responseFromORM) {
+                    setOpenDialog(false);
+                    router.push(`/dashboard/interview/${responseFromORM[0]?.mockId}`);
+                }
             }
-        } else {
-            console.log(`ERROR IN TAKING RESPONSE`);
+        } catch (error) {
+            console.error('Error during interview creation:', error);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     return (
