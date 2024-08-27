@@ -48,13 +48,11 @@ const AddNewInterview = () => {
 
             const resultFromAI = await chatSession.sendMessage(inputPrompt);
 
-            let cleanResponse = resultFromAI.response.text().replace(/```json|```/g, '').trim();
-            console.log(`Cleaned Response:`, cleanResponse);
+            const cleanResponseFromAi = resultFromAI.response.text()
+            const cleanResponse = cleanResponseFromAi.replace(/```json|```/g, '').replace(/[\u0000-\u001F\u007F-\u009F]/g, '').replace(/[\n\r\t]/g, '').trim();
 
             try {
                 const parsedJSONResponse = JSON.parse(cleanResponse);
-                console.log(`Parsed JSON Response:`, parsedJSONResponse);
-
                 const responseFromORM = await db.insert(MockInterview)
                     .values({
                         mockId: uuidv4(),
@@ -72,7 +70,8 @@ const AddNewInterview = () => {
                 }
             } catch (jsonError) {
                 console.error('JSON Parsing Error:', jsonError.message);
-                console.log('Original Response:', cleanResponse);
+                console.warn("Please Contact Developer");
+
             }
         } catch (error) {
             console.error('Error during interview creation:', error);
