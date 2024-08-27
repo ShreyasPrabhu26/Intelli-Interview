@@ -44,15 +44,17 @@ const AddNewInterview = () => {
             - jobDescription: Design and develop software applications 
             - jobExperience: 3 years 
             Ensure the questions cover key concepts and practical scenarios relevant to the specified role, skills, and experience level.
-            For software engineering roles, avoid asking the user to write a coding program; instead, focus on logic and problem-solving skills."`
+            For software engineering roles, avoid asking the user to write a coding program; instead, focus on logic and problem-solving skills."`;
 
             const resultFromAI = await chatSession.sendMessage(inputPrompt);
 
-            // Filtering the response from the model
-            let cleanResponse = (resultFromAI.response.text()).replace(/```json|```/g, '');
-            const parsedJSONResponse = JSON.parse(cleanResponse);
+            let cleanResponse = resultFromAI.response.text().replace(/```json|```/g, '').trim();
+            console.log(`Cleaned Response:`, cleanResponse);
 
-            if (resultFromAI) {
+            try {
+                const parsedJSONResponse = JSON.parse(cleanResponse);
+                console.log(`Parsed JSON Response:`, parsedJSONResponse);
+
                 const responseFromORM = await db.insert(MockInterview)
                     .values({
                         mockId: uuidv4(),
@@ -68,13 +70,17 @@ const AddNewInterview = () => {
                     setOpenDialog(false);
                     router.push(`/dashboard/interview/${responseFromORM[0]?.mockId}`);
                 }
+            } catch (jsonError) {
+                console.error('JSON Parsing Error:', jsonError.message);
+                console.log('Original Response:', cleanResponse);
             }
         } catch (error) {
             console.error('Error during interview creation:', error);
         } finally {
             setLoading(false);
         }
-    }
+    };
+
 
     return (
         <div>

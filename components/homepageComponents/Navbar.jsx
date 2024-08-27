@@ -2,7 +2,7 @@
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image"
-import { Disclosure } from "@headlessui/react";
+import { Button, Disclosure } from "@headlessui/react";
 import { UserButton } from '@clerk/nextjs'
 import React, { useEffect } from 'react'
 
@@ -56,10 +56,19 @@ export const Navbar = () => {
 
                                         <Link href={'/dashboard/upgrade'} className={`nav_element`}>Upgrade</Link>
 
-                                        <div className="flex gap-3">
+                                        <div className="flex gap-3 items-center justify-center">
                                             <span>Switch Theme: </span>
                                             <ThemeChanger />
                                         </div>
+
+                                        <Link
+                                            className="nav_element"
+                                            href="https://www.linkedin.com/in/shreyasprabhu26/"
+                                            target="_blank"
+                                        >
+                                            Report a Bug
+                                        </Link>
+
                                     </>
                                 </Disclosure.Panel>
                             </div>
@@ -75,6 +84,13 @@ export const Navbar = () => {
 
                             <Link href={'/dashboard/upgrade'} className={`nav_element_on_md`}>Upgrade</Link>
 
+                            <Link
+                                className="nav_element_on_md"
+                                href="https://www.linkedin.com/in/shreyasprabhu26/"
+                                target="_blank"
+                            >
+                                Report a Bug
+                            </Link>
                         </>
                     </ul>
                 </div>
