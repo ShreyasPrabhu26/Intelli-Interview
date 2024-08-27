@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Intelli Interview - AI-Powered Interview Preparation",
-  description: "Master your interviews with Intelli Interview, the AI-driven platform designed to help you practice, refine, and excel in any interview scenario.",
+  description: "Master your interviews with Intelli Interview, The AI-driven platform designed to help you practice, refine, and excel in any interview scenario.",
 };
 
 
